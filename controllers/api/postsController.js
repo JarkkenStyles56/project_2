@@ -19,7 +19,7 @@ router.get("/:id", function(req, res) {
     .catch(err => res.status(422).json(err));
 });
 
-/** 
+/**
  * Post - Create
  * Notice how we are also taking in the User Id! Important!
  */

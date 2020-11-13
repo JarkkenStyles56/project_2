@@ -13,13 +13,13 @@ router.get("/", function(req, res) {
 });
 
 /**
- * Home Page, again 
+ * Home Page, again
  */
 router.get("/home", function(req, res) {
   res.render("index", { user: req.user });
 });
 
-/** 
+/**
  * Signup page
  */
 router.get("/signup", function(req, res) {
@@ -42,7 +42,7 @@ router.get("/login", function(req, res) {
 });
 
 /**
- * Forum Page - 
+ * Forum Page -
  * Notice loading our posts, with that include!
  */
 router.get("/forum", isAuthenticated, function(req, res) {
