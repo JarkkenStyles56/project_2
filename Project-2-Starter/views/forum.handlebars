@@ -1,0 +1,100 @@
+{{> navbar user}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="jumbotron">
+                <h4 class="display-6">Hello, {{user.email}}!</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <legend>Forum Posts</legend>
+            <div id="forum-posts">
+            {{#each posts}}
+            <div class="forum-post-card card text-white bg-primary mb-3">
+                <div class="card-header"><h4 class="text-white">{{title}}</h4></div>
+                <div class="card-body">
+                    <p class="card-text">{{body}}</p>
+                    by {{'User.email'}}
+                    @ {{createdAt}}
+                </div>
+            </div>
+            {{/each}}
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md">
+            <form class="forum-post">
+                <fieldset>
+                    <legend>Create Your Own Post</legend>
+                    <p>
+                        Type in your post title and body below, and click submit to send it to our database. We will register it with your email address, and display it above with everyone else's posts!</p>
+                    </p>
+                    <div class="form-group">
+                        <label for="title-input">Title</label>
+                        <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
+                            placeholder="Enter your post title">
+                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="body-input">Body</label>
+                        <textarea class="form-control" id="body-input" name="body"
+                            placeholder="Enter your post body"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post!</button>
+                </fieldset>
+            </form>
+            <br />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Getting references to our form and inputs
+        const postForm = $("form.forum-post");
+        const titleInput = $("input#title-input");
+        const bodyInput = $("textarea#body-input");
+
+        // When the form is submitted, we validate there's a title and body entered
+        postForm.on("submit", function (event) {
+            event.preventDefault();
+            console.log(bodyInput.val(), titleInput.val())
+            var postData = {
+                title: titleInput.val().trim(),
+                body: bodyInput.val().trim()
+            };
+
+            if (!postData.title || !postData.body) {
+                return;
+            }
+
+
+            // If we have a title and password  we run the sendPost function and clear the form
+            sendPost(postData.title, postData.body);
+            titleInput.val("");
+            bodyInput.val("");
+        });
+
+        // sendPost does a post to our "api/posts" route and if successful, redirects us the the forum page
+        function sendPost(title, body) {
+            $.post("/api/posts", {
+                title: title,
+                body: body
+            })
+                .then(function () {
+                    window.location.replace("/forum");
+                    // If there's an error, log the error
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+        }
+    });
+</script>

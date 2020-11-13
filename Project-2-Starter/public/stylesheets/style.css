@@ -1,0 +1,17 @@
+form.signup,
+form.login {
+  margin-top: 50px;
+}
+
+.forum-post-card {
+  width: 100%;
+}
+
+.forum-post {
+  width: 100%;
+}
+
+footer {
+  text-align: center;
+  background-color: black;
+}
