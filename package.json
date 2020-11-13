@@ -7,7 +7,8 @@
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
-    "watch": "nodemon server.js"
+    "watch": "nodemon server.js",
+    "test": "npm run lint"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,9 @@
     "sequelize": "^5.8.6"
   },
   "devDependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^7.13.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.2"
   }
 }

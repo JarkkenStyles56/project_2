@@ -40,7 +40,7 @@ router.put("/:id", function(req, res) {
     .catch(err => res.status(422).json(err));
 });
 
-/** 
+/**
  * User - Delete
  */
 router.delete("/:id", function(req, res) {
