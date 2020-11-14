@@ -19,6 +19,19 @@ module.exports = function(sequelize, DataTypes) {
       password: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+      },
+      isAuthor: {
+        type: DataTypes.BOOLEAN,
+      },
+      canComment: {
+        type: DataTypes.BOOLEAN,
       }
     },
     {
@@ -56,6 +69,13 @@ module.exports = function(sequelize, DataTypes) {
     User.hasMany(models.Post, {
       onDelete: "cascade"
     });
+
+    User.hasMany(models.Comment, {
+      foreignKey: {
+        allowNull: false,
+      }
+    });
+    //ADD RELATIONSHIPS HERE -11/14 CF
   };
 
   return User;
