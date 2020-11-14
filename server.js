@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === "test") {
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync(config).then(function() {
   if (process.env.NODE_ENV === "test") {
-    db.User.create({ email: "test@test.com", password: "password" }).then(
+    db.User.create({ email: "test@test.com", password: "yourRootPassword" }).then(
       () => {
         console.log("Test User Created");
       }
