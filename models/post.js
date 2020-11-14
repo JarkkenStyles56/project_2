@@ -11,6 +11,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: false,
       len: [1]
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 
@@ -22,6 +30,14 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+
+    Post.hasMany(models.Comment, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+
+    //RELATIONSHIPS GO HERE 11/14 -CF
   };
 
   return Post;
