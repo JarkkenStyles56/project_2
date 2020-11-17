@@ -1,3 +1,17 @@
+
+## User Stories 
+AS A video game enthusiast,
+I WANT a blog to connect with other fans,
+SO THAT we can discuss ideas
+
+AS A Blog Reader
+I WANT to easily search by tag,
+I WANT to interact with the content with Comments
+
+AS A content creator
+I WANT to display my article with a photo of the game I’m reviewing,
+SO THAT the users have a visual reference and the page looks interesting
+
 # Project 2 Starter Kit
 
 The Project 2 Starter Kit is an opinionated, preconfigured MVC-style application intended to satisfy the stated requirements and additional requirements of Project 2. It comes with a prerolled authentication system, cypress integration testing, and eslint configuration.
