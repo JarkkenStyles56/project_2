@@ -1,23 +1,14 @@
 {
   "development": {
-    "username": "root",
-
-    "password": "lionheart56!",
-
-
-    "database": "project_2_local",
-    "host": "127.0.0.1",
+    "use_env_variable": "LOCAL_DB",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "lionheart56!",
-    "database": "project_2_test",
-    "host": "127.0.0.1",
+    "use_env_variable": "LOCAL_DB",
     "dialect": "mysql"
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
-    "dialect":"mysql"
+    "dialect": "mysql"
   }
 }
