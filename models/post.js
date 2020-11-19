@@ -22,6 +22,12 @@ module.exports = function (sequelize, DataTypes) {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      isArticle: {
+        type: DataTypes.BOOLEAN,
+      },
+      isReview: {
+        type: DataTypes.BOOLEAN
+      }
     },
     { timestamps: false }
   );

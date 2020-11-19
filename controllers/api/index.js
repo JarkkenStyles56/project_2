@@ -3,7 +3,7 @@ const router = require("express").Router();
 const postRoutes = require("./postsController");
 const userRoutes = require("./usersController");
 const commentRoutes = require ("./commentsController");
-const tagsRoutes = require ("./tagsController")
+const tagsRoutes = require ("./tagsController");
 // Hook up to the router
 router.use("/posts", postRoutes);
 router.use("/users", userRoutes);

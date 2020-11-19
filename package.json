@@ -20,12 +20,14 @@
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "express-session": "^1.16.1",
+    "jquery.hotkeys": "^0.1.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^1.6.5",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^5.8.6"
+    "sequelize": "^5.8.6",
+    "wysiwyg": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "^7.13.0",
