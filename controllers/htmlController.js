@@ -43,20 +43,43 @@ router.get("/login", function (req, res) {
  * Notice loading our posts, with that include!
  */
 router.get("/forum", isAuthenticated, function (req, res) {
-  console.log(req.query);
   db.Post.findAll({ raw: true, include: [db.User] }) // Joins User to Posts! And scrapes all the seqeulize stuff off
     .then((dbModel) => {
-      console.log(dbModel);
-      let filteredByType = dbModel;
-      if (req.query.types !== undefined) {
-        if (req.query.types.includes("articles")) {
-          console.log("hi");
-          filteredByType = dbModel.filter((posts) => posts.isArticle);
-        }
-      }
-      // use the req.query types (if the types exist) filter through the dbModel and render it to "forum.handlebars" under the name "posts"
-      console.log(filteredByType);
-      res.render("forum", { user: req.user, posts: filteredByType });
+      res.render("forum", { user: req.user, posts: dbModel });
+    })
+    .catch((err) => res.status(422).json(err));
+});
+
+/**
+ * Articles Page -
+ */
+router.get("/articles", isAuthenticated, function (req, res) {
+  db.Post.findAll({
+    where: {
+      isArticle: 1,
+    },
+    raw: true,
+    include: [db.User],
+  }) // Joins User to Posts! And scrapes all the seqeulize stuff off
+    .then((dbModel) => {
+      res.render("articles", { user: req.user, posts: dbModel });
+    })
+    .catch((err) => res.status(422).json(err));
+});
+
+/**
+ * Reviews Page -
+ */
+router.get("/reviews", isAuthenticated, function (req, res) {
+  db.Post.findAll({
+    where: {
+      isReview: 1,
+    },
+    raw: true,
+    include: [db.User],
+  }) // Joins User to Posts! And scrapes all the seqeulize stuff off
+    .then((dbModel) => {
+      res.render("reviews", { user: req.user, posts: dbModel });
     })
     .catch((err) => res.status(422).json(err));
 });

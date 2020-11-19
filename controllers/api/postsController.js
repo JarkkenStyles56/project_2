@@ -14,23 +14,23 @@ router.get("/", function (req, res) {
 router.get("/articles", function (req, res) {
   db.Post.findAll({
     where: {
-      isArticle : 1 }
+      isArticle: 1,
+    },
   }).then(function (articlesPost) {
     res.json(articlesPost);
   });
 });
 
-//returns the JSON of all articles, no reviews 
-
+//returns the JSON of all articles, no reviews
 router.get("/reviews", function (req, res) {
   db.Post.findAll({
     where: {
-      isReview : 1 }
+      isReview: 1,
+    },
   }).then(function (reviewPost) {
     res.json(reviewPost);
   });
 });
-
 
 /**
  * Post - Read One
