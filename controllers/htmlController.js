@@ -38,7 +38,6 @@ router.get("/login", function (req, res) {
   }
 });
 
-
 /**
  * Forum Page -
  * Notice loading our posts, with that include!
@@ -85,13 +84,12 @@ router.get("/reviews", isAuthenticated, function (req, res) {
     .catch((err) => res.status(422).json(err));
 });
 
-
 // hard coded this for now, but somehow we need that to be a variable
-// thought process is, use this to grab an id and display ONE article 
-router.get("/1", isAuthenticated, function (req, res) {
+// thought process is, use this to grab an id and display ONE article
+router.get("articles/:id", isAuthenticated, function (req, res) {
   db.Post.findAll({
     where: {
-      id: 1,
+      id: req.params.id,
     },
     raw: true,
     include: [db.User],
@@ -101,8 +99,6 @@ router.get("/1", isAuthenticated, function (req, res) {
     })
     .catch((err) => res.status(422).json(err));
 });
-
-
 
 /**
  * Generic Error Page
