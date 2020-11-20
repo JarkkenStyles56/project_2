@@ -7,19 +7,19 @@ const isAuthenticated = require("../config/middleware/isAuthenticated");
 
 //  * Home Page, again
 //  */
- router.get("/home", function(req, res) {
-   res.render("index", { user: req.user });
- });
+router.get("/home", function (req, res) {
+  res.render("index", { user: req.user });
+});
 /**
  * Home Page
  */
-router.get("/", function(req, res) {
+router.get("/", function (req, res) {
   res.render("index", { user: req.user });
 });
 /**
  * Signup page
  */
-router.get("/signup", function(req, res) {
+router.get("/signup", function (req, res) {
   if (req.user) {
     res.redirect("/");
   } else {
@@ -30,7 +30,7 @@ router.get("/signup", function(req, res) {
 /**
  * Login page
  */
-router.get("/login", function(req, res) {
+router.get("/login", function (req, res) {
   if (req.user) {
     res.redirect("/");
   } else {
@@ -42,41 +42,74 @@ router.get("/login", function(req, res) {
  * Forum Page -
  * Notice loading our posts, with that include!
  */
-router.get("/forum", isAuthenticated, function(req, res) {
+router.get("/forum", isAuthenticated, function (req, res) {
   db.Post.findAll({ raw: true, include: [db.User] }) // Joins User to Posts! And scrapes all the seqeulize stuff off
-    .then(dbModel => {
+    .then((dbModel) => {
       res.render("forum", { user: req.user, posts: dbModel });
     })
-    .catch(err => res.status(422).json(err));
+    .catch((err) => res.status(422).json(err));
+});
+
+/**
+ * Articles Page -
+ */
+router.get("/articles", isAuthenticated, function (req, res) {
+  db.Post.findAll({
+    where: {
+      isArticle: 1,
+    },
+    raw: true,
+    include: [db.User],
+  }) // Joins User to Posts! And scrapes all the seqeulize stuff off
+    .then((dbModel) => {
+      res.render("articles", { user: req.user, posts: dbModel });
+    })
+    .catch((err) => res.status(422).json(err));
+});
+
+/**
+ * Reviews Page -
+ */
+router.get("/reviews", isAuthenticated, function (req, res) {
+  db.Post.findAll({
+    where: {
+      isReview: 1,
+    },
+    raw: true,
+    include: [db.User],
+  }) // Joins User to Posts! And scrapes all the seqeulize stuff off
+    .then((dbModel) => {
+      res.render("reviews", { user: req.user, posts: dbModel });
+    })
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
  * Generic Error Page
  */
 
-
-router.get("/create", function(req, res) {
+router.get("/create", function (req, res) {
   if (req.user) {
     res.redirect("/");
   } else {
     res.render("create", { user: req.user });
   }
 });
-router.get("/viewid", function(req, res) {
-   if (req.user) {
-      res.redirect("/");
-    } else {
+router.get("/viewid", function (req, res) {
+  if (req.user) {
+    res.redirect("/");
+  } else {
     res.render("viewid", { user: req.user });
   }
 });
-router.get("/viewAuth", function(req, res) {
+router.get("/viewAuth", function (req, res) {
   if (req.user) {
     res.redirect("/");
   } else {
     res.render("viewAuth", { user: req.user });
   }
 });
-router.get("*", function(req, res) {
+router.get("*", function (req, res) {
   res.render("errors/404", { user: req.user });
 });
 module.exports = router;

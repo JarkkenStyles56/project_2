@@ -4,24 +4,26 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6">Hello, {{user.email}}!</h4>
+                <h4 class="display-6 text-center">Welcome  {{user.email}}!</h4>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md">
-            <legend>Forum Posts</legend>
+
             <div id="forum-posts">
-            {{#each posts}}
-            <div class="forum-post-card card text-white bg-primary mb-3">
-                <div class="card-header"><h4 class="text-white">{{title}}</h4></div>
-                <div class="card-body">
-                    <p class="card-text">{{body}}</p>
-                    by {{'User.email'}}
-                    @ {{createdAt}}
+                {{#each posts}}
+                <div class="forum-post-card card text-white bg-primary mb-3">
+                    <div class="card-header">
+                        <h4 class="text-white">{{title}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{body}}</p>
+                        by {{'User.email'}}
+                        @ {{createdAt}}
+                    </div>
                 </div>
-            </div>
-            {{/each}}
+                {{/each}}
             </div>
         </div>
 
@@ -31,10 +33,25 @@
     <div class="row">
         <div class="col-md">
             <form class="forum-post">
+
+                <div class="container mt-4 mb-4">
+                    <div class="row justify-content-md-center">
+                        <div class="col-md-12 col-lg-8">
+                            <h1 class="h2 mb-4">Submit issue</h1>
+                            <label>Describe the issue in detail</label>
+                            <div class="form-group">
+                                <textarea id="editor"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </div>
+
                 <fieldset>
                     <legend>Create Your Own Post</legend>
                     <p>
-                        Type in your post title and body below, and click submit to send it to our database. We will register it with your email address, and display it above with everyone else's posts!</p>
+                        Type in your post title and body below, and click submit to send it to our database. We will
+                        register it with your email address, and display it above with everyone else's posts!</p>
                     </p>
                     <div class="form-group">
                         <label for="title-input">Title</label>
@@ -56,6 +73,8 @@
 </div>
 
 <script>
+
+
     $(document).ready(function () {
         // Getting references to our form and inputs
         const postForm = $("form.forum-post");
@@ -96,5 +115,7 @@
                     console.log(err);
                 });
         }
+
+        
     });
 </script>
