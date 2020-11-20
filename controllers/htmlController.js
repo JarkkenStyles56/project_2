@@ -86,7 +86,7 @@ router.get("/reviews", isAuthenticated, function (req, res) {
 
 // hard coded this for now, but somehow we need that to be a variable
 // thought process is, use this to grab an id and display ONE article
-router.get("articles/:id", isAuthenticated, function (req, res) {
+router.get("/articles/:id", isAuthenticated, function (req, res) {
   db.Post.findAll({
     where: {
       id: req.params.id,
