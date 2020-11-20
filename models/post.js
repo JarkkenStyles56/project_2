@@ -17,16 +17,19 @@ module.exports = function (sequelize, DataTypes) {
       rating: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 3
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: false
       },
       isArticle: {
         type: DataTypes.BOOLEAN,
+        defaultValue: true
       },
       isReview: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     },
     { timestamps: false }
