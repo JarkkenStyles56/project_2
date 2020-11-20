@@ -1,0 +1,51 @@
+{{> navbar user }}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="jumbotron">
+                <h4 class="display-6">ARTICLE NAME? </h4>
+
+            </div>
+
+            <div id="forum-posts">
+                {{#each posts}}
+                <div class="forum-post-card card text-white bg-primary mb-3">
+                    <div class="card-header">
+                        <h4 class="text-white">{{title}}</h4>
+                    </div>
+                    <img src="{{image}}">
+                    <div class="card-body">
+                        <p class="card-text">{{body}}</p>
+                        by {{'User.email'}}
+                        @ {{createdAt}}
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+
+
+
+             <div class="row">
+                <div class="col-md">
+                    <form class="forum-post">
+
+                        <div class="container mt-4 mb-4">
+                            <div class="row justify-content-md-center">
+                                <div class="col-md-12 col-lg-8">
+                                    <h1 class="h2 mb-4">Submit a comment</h1>
+                                    <label>What did you think?</label>
+                                     <div class="form-group">
+                                        <textarea id="editor"></textarea>
+                                     </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                                 </div>
+                            </div>
+                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
