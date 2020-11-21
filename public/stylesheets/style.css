@@ -15,3 +15,7 @@ footer {
   text-align: center;
   background-color: black;
 }
+.article-header {
+  display: flex;
+  justify-content:space-between ;
+}
