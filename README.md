@@ -1,4 +1,4 @@
-![logo](images\blog_of_holding.png)
+![logo](/images/blog_of_holding.png)
 ## User Stories 
 ```
 -AS A gaming enthusiast,
