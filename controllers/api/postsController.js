@@ -46,8 +46,10 @@ router.get("/:id", function (req, res) {
  * Notice how we are also taking in the User Id! Important!
  */
 router.post("/", function (req, res) {
+  let truncatedData = req.body.body.substring(0, 500) + "...";
   db.Post.create({
     UserId: req.user.id,
+    truncated: truncatedData,
     ...req.body,
   })
     .then((dbModel) => res.json(dbModel))
