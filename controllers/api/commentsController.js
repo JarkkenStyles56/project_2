@@ -28,8 +28,6 @@ router.post("/", function (req, res) {
     UserId: req.user.id,
     ...req.body,
   })
-    .then((dbModel) => res.json(dbModel))
-    .catch((err) => res.status(422).json(err));
 });
 
 /**
