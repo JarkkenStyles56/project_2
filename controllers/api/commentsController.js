@@ -6,8 +6,8 @@ const router = require("express").Router();
  */
 router.get("/", function (req, res) {
   db.Comment.findAll(req.query)
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
@@ -15,8 +15,8 @@ router.get("/", function (req, res) {
  */
 router.get("/:id", function (req, res) {
   db.Comment.findByPk(req.params.id)
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
@@ -26,10 +26,8 @@ router.get("/:id", function (req, res) {
 router.post("/", function (req, res) {
   db.Comment.create({
     UserId: req.user.id,
-    ...req.body
+    ...req.body,
   })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
 });
 
 /**
@@ -37,8 +35,8 @@ router.post("/", function (req, res) {
  */
 router.put("/:id", function (req, res) {
   db.Comment.update(req.body, { where: { id: req.params.id } })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 /**
@@ -46,8 +44,8 @@ router.put("/:id", function (req, res) {
  */
 router.delete("/:id", function (req, res) {
   db.Comment.destroy({ where: { id: req.params.id } })
-    .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .then((dbModel) => res.json(dbModel))
+    .catch((err) => res.status(422).json(err));
 });
 
 // Defining methods for the booksController
