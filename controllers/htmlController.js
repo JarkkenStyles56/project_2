@@ -87,15 +87,25 @@ router.get("/reviews", isAuthenticated, function (req, res) {
 // hard coded this for now, but somehow we need that to be a variable
 // thought process is, use this to grab an id and display ONE article
 router.get("/articles/:id", isAuthenticated, function (req, res) {
-  db.Post.findAll({
-    where: {
-      id: req.params.id,
-    },
-    raw: true,
-    include: [db.User],
-  }) // Joins User to Posts! And scrapes all the seqeulize stuff off
-    .then((dbModel) => {
-      res.render("article", { user: req.user, posts: dbModel });
+
+  Promise.all([
+    db.Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      raw: true,
+      include: [db.User],
+    }),
+    db.Comment.findAll({
+      where: {
+        PostId: req.params.id,
+      },
+      raw: true,
+      include: [db.User],
+    }),
+  ])
+    .then(function ([post, comments]) {
+      res.render("article", { user: req.user, post: post, comments: comments });
     })
     .catch((err) => res.status(422).json(err));
 });

@@ -31,22 +31,8 @@
 
     </div>
 
-    <div class="row">
-        <div class="col-md">
-            <form class="forum-post">
+    <br>
 
-                <div class="container mt-4 mb-4">
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-12 col-lg-8">
-                            <h1 class="h2 mb-4">Submit issue</h1>
-                            <label>Describe the issue in detail</label>
-                            <div class="form-group">
-                                <textarea id="editor"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </div>
 
                 <fieldset>
                     <legend>Create Your Own Post</legend>
@@ -71,23 +57,7 @@
                         <textarea class="form-control" id="body-input" name="body"
                             placeholder="Enter your post body"></textarea>
                     </div>
-                    {{!-- <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" id="isArticle" aria-label="Checkbox for following text input">
-                                Article?
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" id="isReview" aria-label="Checkbox for following text input">
-                                Review?
-                            </div>
-                        </div>
-                    </div> --}}
-                    <button type="submit" class="btn btn-primary">Post!</button>
+                    <button type="submit" id="submit" class="btn btn-primary">Post!</button>
                 </fieldset>
             </form>
             <br />
@@ -104,53 +74,20 @@
         const titleInput = $("input#title-input");
         const imageInput = $("input#image-input");
         const bodyInput = $("textarea#body-input");
-        //  const articleInput = $("input#isArticle");
-        //  const reviewInput = $("input#isReview");
-
-        // When the form is submitted, we validate there's a title and body entered
-        postForm.on("submit", function (event) {
-            event.preventDefault();
-
-           // console.log(bodyInput.val(), titleInput.val(), imageInput.val()//, articleInput.val(), reviewInput.val())
-            var postData = {
-                title: titleInput.val().trim(),
-                image: imageInput.val().trim(),
-                body: bodyInput.val().trim(),
-                //  isArticle: articleInput.val(),
-                //  isReview: reviewInput.val()
-            };
-
-            if (!postData.title || !postData.image || !postData.body //|| !postData.isArticle || !postData.isReview) {
-                return; 
-        }
 
 
-            // If we have a title and password  we run the sendPost function and clear the form
-            sendPost(postData.title, postData.image, postData.body//, postData.isArticle, postData.isReview);
-            titleInput.val("");
-        imageInput.val("");
-        bodyInput.val("");
-        //    isArticle.val(Boolean);
-        //    isReview.val(Boolean);
-    });
-
-    // sendPost does a post to our "api/posts" route and if successful, redirects us the the forum page
-    function sendPost(title, image, body//, isArticle, isReview) {
-            $.post("/api/posts", {
-        title: title,
-        image: image,
-        body: body
-        //    isArticle: isArticle,
-        //    isReview: isReview
-    })
-        .then(function () {
-            window.location.replace("/forum");
-            // If there's an error, log the error
+        $("#submit").click(function (event){
+            event.preventDeault();
+            console.log(postForm)
+            console.log(titleInput)
+            console.log(imageInput)
+            console.log(bodyInput)
         })
-        .catch(function (err) {
-            console.log(err);
-        });
-        }
 
+          
     });
+
+    
+        
+
 </script>
