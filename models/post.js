@@ -50,7 +50,6 @@ module.exports = function (sequelize, DataTypes) {
       },
     });
 
-    //RELATIONSHIPS GO HERE 11/14 -CF
   };
 
   return Post;
