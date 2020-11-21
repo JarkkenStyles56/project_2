@@ -12,7 +12,7 @@
             <div id="forum-posts">
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-body">
-                        
+
                         <p class="card-text">{{body}}</p>
                         by {{'User.email'}}
                     </div>
@@ -23,7 +23,7 @@
 
 
             {{#if comments.length }}
-            <div class="col-sm" >
+            <div class="col-sm">
                 {{#each comments}}
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-body">
@@ -36,6 +36,12 @@
             {{/if}}
 
 
+                    <div class="form-group">
+                        <label for="body-input">Submit a Comment! </label>
+                        <textarea class="form-control" id="body-input" name="body"
+                            placeholder="Enter your comment here"></textarea>
+                            <button data-post = {{post.id}} id ="submit">Submit</button>
+                    </div>
 
 
 
@@ -45,25 +51,32 @@
 
 
 
-            <div class="row">
-                <div class="col-md">
-                    <form class="forum-post">
-
-                        <div class="container mt-4 mb-4">
-                            <div class="row justify-content-md-center">
-                                <div class="col-md-12 col-lg-8">
-                                    <h1 class="h2 mb-4">Submit a comment</h1>
-                                    <label>What did you think?</label>
-                                    <div class="form-group">
-                                        <textarea id="editor"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+
+
+
+<script>
+    $("#submit").click(function (event) {
+        event.preventDefault();
+        const postId = $(this).attr("data-post");
+        const postContent = $("#body-input").val().trim();
+        console.log("button was clicked");
+        console.log(postContent);
+        console.log(postId);
+
+        $.ajax({
+            type: 'post',
+            url: '/api/comments/',
+            data: {
+                commentText : postContent,
+                PostId: postId
+            }
+        }).then(function(data){
+            console.log("commentsent")
+            location.reload();
+        })
+    });
+</script>
