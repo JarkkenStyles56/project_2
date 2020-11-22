@@ -19,8 +19,11 @@
                     </div>
                     <img class="float-left" src="{{image}}">
                     <div class="card-body">
-                        <p class="card-text text-center">{{body}}</p>
-                        <p class="float-right">by {{'User.email'}}</p>
+
+                        <p class="card-text text-center">{{truncated}}</p>
+                        p class="float-right">by {{'User.email'}}</p>
+                        
+
                     </div>
                 </div>
                 {{/each}}
@@ -39,6 +42,14 @@
             Type in your post title and body below, and click submit to send it to our database. We will
             register it with your email address, and display it above with everyone else's posts!</p>
         </p>
+
+        <div class="form-group">
+            <label for="title-input">Title</label>
+            <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
+                placeholder="Enter your post title">
+            <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
+        </div>
+
 
         <h3>Select your content type</h3>
         <input type="radio" id="article" name="articleType" value="article">
@@ -65,6 +76,7 @@
                 placeholder="Enter your post title">
             <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
         </div>
+
         <div class="form-group">
             <label for="image-input">Image URL</label>
             <input type="text" class="form-control" id="image-input" aria-describedby="postHelp"
@@ -89,55 +101,33 @@
     $(document).ready(function () {
         // Getting references to our form and inputs
 
-        $("#review").on('change', function (event) {
-            event.preventDefault();
-            console.log("something changed")
-            $("#hide").removeClass("hide")
-        })
+        const postForm = $("form.forum-post");
+        const titleInput = $("input#title-input");
+        const imageInput = $("input#image-input");
+        const bodyInput = $("textarea#body-input");
 
-        $("#article").on('change', function (event) {
-            event.preventDefault();
-            console.log("something changed")
-            $("#hide").addClass("hide");
-        })
 
         $("#submit").click(function (event) {
             event.preventDefault();
-
-            const postTitle = $("#title-input").val().trim();
-            const postImg = $("#image-input").val().trim();
-            const postBody = $("#body-input").val().trim();
-
-            if (document.getElementById('article').checked) {
-                console.log("article is checked")
-
-                //create varaibles that would be true / false, and submit THESE 
-
-                const articleyes = "true";
-                const reviewno = "false";
-
-                console.log(postBody);
-
-
-            }
-
-            if (document.getElementById('review').checked) {
-                console.log("review is checked")
-
-                const articleno = "false";
-                const reviewyes = "true";
-
-
-            }
-
-
-
+            console.log(postForm)
+            console.log(titleInput)
+            console.log(imageInput)
+            console.log(bodyInput)
+            let title = titleInput.val().trim();
+            let image = imageInput.val().trim();
+            let body = bodyInput.val().trim();
+            $.ajax({
+                method: 'POST',
+                url: '/api/posts',
+                data: {
+                    body: body,
+                    title: title,
+                    image: image
+                }
+            }).then(results => {
+                console.log('posted');
+            })
         })
-
-
-
-
-
 
 
     });

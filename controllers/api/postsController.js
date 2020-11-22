@@ -6,7 +6,10 @@ const router = require("express").Router();
  */
 router.get("/", function (req, res) {
   db.Post.findAll(req.query)
-    .then((dbModel) => res.json(dbModel))
+    .then((dbModel) => {
+      res.json(dbModel);
+      console.log(dbModel);
+    })
     .catch((err) => res.status(422).json(err));
 });
 
@@ -46,8 +49,10 @@ router.get("/:id", function (req, res) {
  * Notice how we are also taking in the User Id! Important!
  */
 router.post("/", function (req, res) {
+  let truncatedData = req.body.body.substring(0, 500) + "...";
   db.Post.create({
     UserId: req.user.id,
+    truncated: truncatedData,
     ...req.body,
   })
     .then((dbModel) => res.json(dbModel))
