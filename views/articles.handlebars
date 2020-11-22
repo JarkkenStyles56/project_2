@@ -13,11 +13,11 @@
                 {{#each posts}}
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-header">
-                        <h4 class="text-white">{{title}}</h4>
+                        <h4 class="text-white float-left">{{title}}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">{{body}}</p>
-                        by {{'User.email'}}
+                        <p class="card-text text-center">{{body}}</p>
+                        <p class="float-right">by {{'User.email'}}</p>
                     </div>
                 </div>
                 {{/each}}
