@@ -20,6 +20,12 @@
                 {{/with}}
             </div>
 
+            <script>
+                tinymce.init({
+                    selector: '#mytextarea'
+                });</script>
+
+
 
 
             {{#if comments.length }}
@@ -36,12 +42,13 @@
             {{/if}}
 
 
-                    <div class="form-group">
-                        <label for="body-input">Submit a Comment! </label>
-                        <textarea class="form-control" id="body-input" name="body"
-                            placeholder="Enter your comment here"></textarea>
-                            <button data-post = {{post.id}} id ="submit">Submit</button>
-                    </div>
+            <div class="form-group">
+                <form method="post">
+                    <textarea id="mytextarea">Write your comment here!</textarea>
+                </form>
+
+                <button data-post={{post.id}} id="submit">Submit</button>
+            </div>
         </div>
     </div>
 </div>
@@ -52,20 +59,19 @@
 <script>
     $("#submit").click(function (event) {
         event.preventDefault();
+        var myText = tinyMCE.activeEditor.getBody().textContent;
+        console.log(myText)
         const postId = $(this).attr("data-post");
-        const postContent = $("#body-input").val().trim();
-        console.log("button was clicked");
-        console.log(postContent);
-        console.log(postId);
+        const postContent = tinyMCE.activeEditor.getBody().textContent;
 
         $.ajax({
             type: 'post',
             url: '/api/comments/',
             data: {
-                commentText : postContent,
+                commentText: postContent,
                 PostId: postId
             }
-        }).then(function(data){
+        }).then(function (data) {
             console.log("commentsent")
             location.reload();
         })
