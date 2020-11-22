@@ -19,7 +19,7 @@
                     </div>
                     <img src="{{image}}">
                     <div class="card-body">
-                        <p class="card-text">{{body}}</p>
+                        <p class="card-text">{{truncated}}</p>
                         by {{'User.email'}}
                         @ {{createdAt}}
                     </div>
@@ -34,35 +34,34 @@
     <br>
 
 
-                <fieldset>
-                    <legend>Create Your Own Post</legend>
-                    <p>
-                        Type in your post title and body below, and click submit to send it to our database. We will
-                        register it with your email address, and display it above with everyone else's posts!</p>
-                    </p>
-                    <div class="form-group">
-                        <label for="title-input">Title</label>
-                        <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
-                            placeholder="Enter your post title">
-                        <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="image-input">Image URL</label>
-                        <input type="text" class="form-control" id="image-input" aria-describedby="postHelp"
-                            placeholder="Enter your image url here!">
-                        <small id="postHelp" class="form-text text-muted">Make it shiny!</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="body-input">Body</label>
-                        <textarea class="form-control" id="body-input" name="body"
-                            placeholder="Enter your post body"></textarea>
-                    </div>
-                    <button type="submit" id="submit" class="btn btn-primary">Post!</button>
-                </fieldset>
-            </form>
-            <br />
+    <fieldset>
+        <legend>Create Your Own Post</legend>
+        <p>
+            Type in your post title and body below, and click submit to send it to our database. We will
+            register it with your email address, and display it above with everyone else's posts!</p>
+        </p>
+        <div class="form-group">
+            <label for="title-input">Title</label>
+            <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
+                placeholder="Enter your post title">
+            <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="image-input">Image URL</label>
+            <input type="text" class="form-control" id="image-input" aria-describedby="postHelp"
+                placeholder="Enter your image url here!">
+            <small id="postHelp" class="form-text text-muted">Make it shiny!</small>
+        </div>
+        <div class="form-group">
+            <label for="body-input">Body</label>
+            <textarea class="form-control" id="body-input" name="body" placeholder="Enter your post body"></textarea>
+        </div>
+        <button type="submit" id="submit" class="btn btn-primary">Post!</button>
+    </fieldset>
+    </form>
+    <br />
+</div>
+</div>
 </div>
 
 <script>
@@ -76,18 +75,32 @@
         const bodyInput = $("textarea#body-input");
 
 
-        $("#submit").click(function (event){
-            event.preventDeault();
+        $("#submit").click(function (event) {
+            event.preventDefault();
             console.log(postForm)
             console.log(titleInput)
             console.log(imageInput)
             console.log(bodyInput)
+            let title = titleInput.val().trim();
+            let image = imageInput.val().trim();
+            let body = bodyInput.val().trim();
+            $.ajax({
+                method: 'POST',
+                url: '/api/posts',
+                data: {
+                    body: body,
+                    title: title,
+                    image: image
+                }
+            }).then(results => {
+                console.log('posted');
+            })
         })
 
-          
+
     });
 
-    
-        
+
+
 
 </script>
