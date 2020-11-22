@@ -15,13 +15,12 @@
                 {{#each posts}}
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-header">
-                        <h4 class="text-white"><a href="/articles/{{id}}">{{title}}</a></h4>
+                        <h4 class="text-white"> <a href="/articles/{{id}}">{{title}}</a></h4>
                     </div>
-                    <img src="{{image}}">
+                    <img class="float-left" src="{{image}}">
                     <div class="card-body">
-                        <p class="card-text">{{body}}</p>
-                        by {{'User.email'}}
-                        @ {{createdAt}}
+                        <p class="card-text text-center">{{body}}</p>
+                        <p class="float-right">by {{'User.email'}}</p>
                     </div>
                 </div>
                 {{/each}}
