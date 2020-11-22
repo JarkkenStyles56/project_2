@@ -11,7 +11,12 @@ form.login {
   width: 100%;
 }
 
+.hide {
+  display: none;
+}
+
 footer {
   text-align: center;
   background-color: black;
 }
+
