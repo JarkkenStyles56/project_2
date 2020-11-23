@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
       },
       truncated: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         len: [1],
 
       },
