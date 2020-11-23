@@ -17,7 +17,6 @@
                     <div class="card-header">
                         <h4 class="text-white"> <a href="/articles/{{id}}">{{title}}</a></h4>
                     </div>
-                    <img class="float-left" src="{{image}}">
                     <div class="card-body">
 
                         <p class="card-text text-center">{{truncated}}</p>
@@ -77,12 +76,6 @@
             <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
         </div>
 
-        <div class="form-group">
-            <label for="image-input">Image URL</label>
-            <input type="text" class="form-control" id="image-input" aria-describedby="postHelp"
-                placeholder="Enter your image url here!">
-            <small id="postHelp" class="form-text text-muted">Make it shiny!</small>
-        </div>
         <div class="form-group">
             <label for="body-input">Body</label>
             <textarea class="form-control" id="body-input" name="body" placeholder="Enter your post body"></textarea>
