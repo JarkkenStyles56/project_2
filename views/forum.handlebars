@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6 text-center">Welcome {{user.email}}!</h4>
+                <h4 class="display-6 text-center animate__animated animate__fadeInDown">Welcome {{user.email}}!</h4>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
                 {{#each posts}}
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-header">
-                        <h4 class="text-white"> <a href="/articles/{{id}}">{{title}}</a></h4>
+                        <h4 class="text-white"> <a class ="wiggle animate__animated " href="/articles/{{id}}">{{title}}</a></h4>
                     </div>
                     <div class="card-body">
 
@@ -91,6 +91,7 @@
 </div>
 </div>
 
+
 <script>
 
 
@@ -101,28 +102,28 @@
         //listen for review radio button to be clicked 
         $("#review").on("change", function (event) {
             console.log("reivew radio button was clicked");
-    isArticle = false;
-    isReview = true;
+            isArticle = false;
+            isReview = true;
             //if ($("#review").is(':checked')) {
-              //  console.log("review is checked");
-                $("#hide").removeClass("hide");
+            //  console.log("review is checked");
+            $("#hide").removeClass("hide");
             //};
-        
+
         });
 
         $("#article").on("change", function (event) {
             console.log("article radio button was clicked");
-    isArticle = true;
-    isReview = false;
+            isArticle = true;
+            isReview = false;
 
             //if ($("#article").is(':checked')) {
             //    console.log("article is checked");
-                $("#hide").addClass("hide");
+            $("#hide").addClass("hide");
             //};
 
         });
 
-        $("#rating").on("change", function(event){
+        $("#rating").on("change", function (event) {
             event.preventDefault()
             ratingValue = parseInt(($(this).val()));
         })
@@ -157,10 +158,10 @@
                 }
             }).then(results => {
                 console.log('posted');
-                 location.reload();
+                location.reload();
             })
 
-           
+
         })
 
 

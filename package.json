@@ -22,6 +22,7 @@
     "express-handlebars": "^4.0.4",
     "express-session": "^1.16.1",
     "jquery.hotkeys": "^0.1.0",
+    "literature-clock": "^0.2.0",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^1.6.5",
