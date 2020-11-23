@@ -19,7 +19,7 @@
                 </div>
                 {{/with}}
             </div>
-            
+
             <div>
                 <h3>Comments</h3>
             </div>
@@ -76,9 +76,10 @@
             }
         }).then(function (data) {
             console.log("commentsent")
-          
+            location.reload();
+
         })
 
-          location.reload();
+
     });
 </script>

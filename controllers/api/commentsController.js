@@ -23,10 +23,12 @@ router.get("/:id", function (req, res) {
  * Comment - Create
  * Notice how we are also taking in the User Id! Important!
  */
-router.post("/", function (req) {
+router.post("/", function (req, res) {
   db.Comment.create({
     UserId: req.user.id,
     ...req.body,
+  }).then(function () {
+    res.json("success");
   });
 });
 

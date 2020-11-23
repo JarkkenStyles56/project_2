@@ -50,6 +50,7 @@ router.get("/:id", function (req, res) {
  */
 router.post("/", function (req, res) {
   let truncatedData = req.body.body.substring(0, 500) + "...";
+  console.log(req.body);
   db.Post.create({
     UserId: req.user.id,
     truncated: truncatedData,

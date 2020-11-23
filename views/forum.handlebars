@@ -80,25 +80,12 @@
             <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
         </div>
 
-
-
-
-
-
-        <div class="form-group">
-            <label for="title-input">Title</label>
-            <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
-                placeholder="Enter your post title">
-            <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
-        </div>
-
         <div class="form-group">
             <label for="body-input">Body</label>
             <textarea class="form-control" id="body-input" name="body" placeholder="Enter your post body"></textarea>
         </div>
         <button type="submit" id="submit" class="btn btn-primary">Post!</button>
     </fieldset>
-    </form>
     <br />
 </div>
 </div>
@@ -108,31 +95,36 @@
 
 
     $(document).ready(function () {
-
+        let ratingValue = 1;
+        let isArticle = true;
+        let isReview = false;
         //listen for review radio button to be clicked 
         $("#review").on("change", function (event) {
             console.log("reivew radio button was clicked");
-
-            if ($("#review").is(':checked')) {
-                console.log("review is checked");
+    isArticle = false;
+    isReview = true;
+            //if ($("#review").is(':checked')) {
+              //  console.log("review is checked");
                 $("#hide").removeClass("hide");
-            };
-
+            //};
+        
         });
 
         $("#article").on("change", function (event) {
             console.log("article radio button was clicked");
+    isArticle = true;
+    isReview = false;
 
-            if ($("#article").is(':checked')) {
-                console.log("article is checked");
+            //if ($("#article").is(':checked')) {
+            //    console.log("article is checked");
                 $("#hide").addClass("hide");
-            };
+            //};
 
         });
 
-        $("#test").click(function(event){
+        $("#rating").on("change", function(event){
             event.preventDefault()
-            console.log(event)
+            ratingValue = parseInt(($(this).val()));
         })
 
 
@@ -151,20 +143,24 @@
             //console.log(imageInput) we can delete this because we are scrabing image uploads 
             console.log(bodyInput)
             let title = titleInput.val().trim();
-            let image = imageInput.val().trim();
             let body = bodyInput.val().trim();
+
             $.ajax({
                 method: 'POST',
                 url: '/api/posts',
                 data: {
                     body: body,
                     title: title,
+                    rating: ratingValue,
+                    isArticle,
+                    isReview,
                 }
             }).then(results => {
                 console.log('posted');
+                 location.reload();
             })
 
-            location.reload();
+           
         })
 
 
