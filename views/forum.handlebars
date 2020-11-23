@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6 text-center animate__animated animate__fadeInDown">Welcome {{user.email}}!</h4>
+                <h3 class="display-6 text-center animate__animated animate__fadeInDown">Welcome {{user.email}}!</h3>
+                <br>
+                   <h6 class="display-6 text-center animate__animated animate__hinge animate__delay-5s	5s" id="joke"></h6>
             </div>
         </div>
     </div>
@@ -96,6 +98,9 @@
 
 
     $(document).ready(function () {
+
+        getJoke();
+
         let ratingValue = 1;
         let isArticle = true;
         let isReview = false;
@@ -167,7 +172,19 @@
 
     });
 
+function getJoke(){
+    let querryURL = "https://sv443.net/jokeapi/v2/joke/Programming,Pun?blacklistFlags=nsfw,racist,sexist&format=txt";
 
+    $.ajax({
+        url: querryURL,
+        method: "GET",
+    }).then(function(response) {
+        console.log(typeof(response))
+        console.log(response);
+
+        $("#joke").text(response);
+    })
+}
 
 
 </script>
