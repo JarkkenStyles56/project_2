@@ -41,7 +41,7 @@ app.set("view engine", "handlebars");
 // Add all our routes
 app.use(routes);
 
-let config = { force: true };
+let config = { force: false };
 if (process.env.NODE_ENV === "test") {
   config.force = true;
 }
