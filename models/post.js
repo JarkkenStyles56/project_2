@@ -16,27 +16,22 @@ module.exports = function (sequelize, DataTypes) {
       },
       truncated: {
         type: DataTypes.TEXT,
-        allowNull: false,
+        allowNull: true,
         len: [1],
-
       },
       rating: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 3
-      },
-      image: {
-        type: DataTypes.STRING,
-        allowNull: false
+        defaultValue: 3,
       },
       isArticle: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
       isReview: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
-      }
+        defaultValue: false,
+      },
     },
     { timestamps: false }
   );
@@ -55,7 +50,6 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false,
       },
     });
-
   };
 
   return Post;

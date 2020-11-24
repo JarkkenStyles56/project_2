@@ -4,7 +4,9 @@
     <div class="row">
         <div class="col-md">
             <div class="jumbotron">
-                <h4 class="display-6 text-center">Welcome {{user.email}}!</h4>
+                <h3 class="display-6 text-center animate__animated animate__fadeInDown">Welcome {{user.email}}!</h3>
+                <br>
+                   <h6 class="display-6 text-center animate__animated animate__hinge animate__delay-5s	5s" id="joke"></h6>
             </div>
         </div>
     </div>
@@ -15,14 +17,13 @@
                 {{#each posts}}
                 <div class="forum-post-card card text-white bg-primary mb-3">
                     <div class="card-header">
-                        <h4 class="text-white"> <a href="/articles/{{id}}">{{title}}</a></h4>
+                        <h4 class="text-white"> <a class ="wiggle animate__animated " href="/articles/{{id}}">{{title}}</a></h4>
                     </div>
-                    <img class="float-left" src="{{image}}">
                     <div class="card-body">
 
                         <p class="card-text text-center">{{truncated}}</p>
-                        p class="float-right">by {{'User.email'}}</p>
-                        
+                        <p class="float-right">by {{'User.email'}}</p>
+
 
                     </div>
                 </div>
@@ -44,95 +45,146 @@
         </p>
 
         <div class="form-group">
+            <h3>Select your content type</h3>
+            <input type="radio" id="article" name="articleType" value="article">
+            <label for="article">Article</label>
+
+            <input type="radio" id="review" name="articleType" value="review">
+            <label for="review">Review</label>
+
+            <br>
+
+            <div id="hide" class="hide">
+                <br>
+
+                <label for="rating">Select a rating</label>
+
+                <select name="rating" id="rating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <button id="test">test</button>
+            </div>
+
+            <br>
+
             <label for="title-input">Title</label>
             <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
                 placeholder="Enter your post title">
             <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
         </div>
 
-
-        <h3>Select your content type</h3>
-        <input type="radio" id="article" name="articleType" value="article">
-        <label for="article">Article</label>
-
-        <input type="radio" id="review" name="articleType" value="review">
-        <label for="review">Review</label>
-
-        <div id="hide" class="hide">
-            <label for="cars">Choose a car:</label>
-
-            <select name="cars" id="cars">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="mercedes">Mercedes</option>
-                <option value="audi">Audi</option>
-            </select>
-
-        </div>
-
-        <div class="form-group">
-            <label for="title-input">Title</label>
-            <input type="text" class="form-control" id="title-input" aria-describedby="postHelp"
-                placeholder="Enter your post title">
-            <small id="postHelp" class="form-text text-muted">This'l be shared!</small>
-        </div>
-
-        <div class="form-group">
-            <label for="image-input">Image URL</label>
-            <input type="text" class="form-control" id="image-input" aria-describedby="postHelp"
-                placeholder="Enter your image url here!">
-            <small id="postHelp" class="form-text text-muted">Make it shiny!</small>
-        </div>
         <div class="form-group">
             <label for="body-input">Body</label>
             <textarea class="form-control" id="body-input" name="body" placeholder="Enter your post body"></textarea>
         </div>
         <button type="submit" id="submit" class="btn btn-primary">Post!</button>
     </fieldset>
-    </form>
     <br />
 </div>
 </div>
 </div>
 
+
 <script>
 
 
     $(document).ready(function () {
-        // Getting references to our form and inputs
 
+        getJoke();
+
+        let ratingValue = 1;
+        let isArticle = true;
+        let isReview = false;
+        //listen for review radio button to be clicked 
+        $("#review").on("change", function (event) {
+            console.log("reivew radio button was clicked");
+            isArticle = false;
+            isReview = true;
+            //if ($("#review").is(':checked')) {
+            //  console.log("review is checked");
+            $("#hide").removeClass("hide");
+            //};
+
+        });
+
+        $("#article").on("change", function (event) {
+            console.log("article radio button was clicked");
+            isArticle = true;
+            isReview = false;
+
+            //if ($("#article").is(':checked')) {
+            //    console.log("article is checked");
+            $("#hide").addClass("hide");
+            //};
+
+        });
+
+        $("#rating").on("change", function (event) {
+            event.preventDefault()
+            ratingValue = parseInt(($(this).val()));
+        })
+
+
+        //grab elements from post via AJAX
         const postForm = $("form.forum-post");
         const titleInput = $("input#title-input");
         const imageInput = $("input#image-input");
         const bodyInput = $("textarea#body-input");
 
 
+        //listen on submit button that grabs the elements in the text areas and submits them 
         $("#submit").click(function (event) {
             event.preventDefault();
             console.log(postForm)
             console.log(titleInput)
-            console.log(imageInput)
+            //console.log(imageInput) we can delete this because we are scrabing image uploads 
             console.log(bodyInput)
             let title = titleInput.val().trim();
-            let image = imageInput.val().trim();
             let body = bodyInput.val().trim();
+
             $.ajax({
                 method: 'POST',
                 url: '/api/posts',
                 data: {
                     body: body,
                     title: title,
-                    image: image
+                    rating: ratingValue,
+                    isArticle,
+                    isReview,
                 }
             }).then(results => {
                 console.log('posted');
+                location.reload();
             })
+
+
         })
 
 
     });
 
+function getJoke(){
+    let querryURL = "https://sv443.net/jokeapi/v2/joke/Programming,Pun?blacklistFlags=nsfw,racist,sexist&format=txt";
 
+    $.ajax({
+        url: querryURL,
+        method: "GET",
+    }).then(function(response) {
+        console.log(typeof(response))
+        console.log(response);
+
+        $("#joke").text(response);
+    })
+}
 
 
 </script>
