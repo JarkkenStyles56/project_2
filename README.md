@@ -20,7 +20,8 @@
 
 -AS A content creator
 
--I WANT a form that makes it easy to make an interesting article/review that will draw the attention of the other users on the application,
+-I WANT a form that makes it easy to make an interesting article/review that will draw the attention of the other
+ users on the application,
 
 -SO THAT users will want to comment on my post and build communities around my content.
 ```
@@ -32,22 +33,26 @@
 >
 >>WHEN I access the homepage,
 >
->>THEN I am presented with a good overview of what the website is about, what I'll be able to do, a greeting to the website, and instructions to sign up and/or log in to have the best experience.
+>>THEN I am presented with a good overview of what the website is about, what I'll be able to do, a greeting to the 
+  website, and instructions to sign up and/or log in to have the best experience.
 >
 >>WHEN I am looking at the "Blogs" page,
 >
->>THEN a number of posts are presented to me, I am able to then filter further by articles and reviews which will display a number of posts designated to those 2 categories.
+>>THEN a number of posts are presented to me, I am able to then filter further by articles and reviews which will 
+  display a number of posts designated to those 2 categories.
 
 >>WHEN I sign up,
 >
->>THEN I am prompted to create my very first post, and see a form to use to easily create said post. It includes a Title, Body, Image, and the option to label it as an article or a review.
+>>THEN I am prompted to create my very first post, and see a form to use to easily create said post. It includes a 
+  Title, Body, Image, and the option to label it as an article or a review.
 >
 
 >GIVEN I am an authorized user (signed up and logged in)
 >
 >>WHEN I access a blog post,
 >
->>THEN I am presented with the post's designated page, it's author, and any comments associated with the post. I can also add my own comment below the post with the use of a text editor to make my comment stand out.
+>>THEN I am presented with the post's designated page, it's author, and any comments associated with the post.
+  I can also add my own comment below the post with the use of a text editor to make my comment stand out.
 
 ```
 - - -
@@ -55,7 +60,8 @@
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and 
+testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
@@ -91,7 +97,8 @@ What things you need to install the software and how to install them
 -DROP DATABASE IF EXISTS project_2_test;
 -CREATE DATABASE project_2_test;
 ```
--These names are of course up to you; however, we will need a test and local database if we wish to use the prerolled integration tests. 
+-These names are of course up to you; however, we will need a test and local database if we wish to use the prerolled 
+ integration tests. 
 
 
 
